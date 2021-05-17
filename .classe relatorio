@@ -1,0 +1,73 @@
+package projetoCadastro;
+
+/** 
+ * @author Wesley Jaguaracy
+ */
+public class Relatorio extends javax.swing.JFrame {
+    
+    private String ValorTotalInvest;
+    private int QuantidadeMaxVisualizada;
+    private int QuantidadeMaxClique;
+    private int QuantidadeMaxCompartilhamento;
+    private Cadastro Cad;
+    private Calculadora02 cal;
+    
+    public Relatorio (){
+    }
+    
+    public Relatorio(String ValorTotalInvest, int QuantidadeMaxVisualizada, int QuantidadeMaxClique, int QuantidadeMaxCompartilhamento){
+        this.ValorTotalInvest = ValorTotalInvest;
+        this.QuantidadeMaxVisualizada = QuantidadeMaxVisualizada;
+        this.QuantidadeMaxClique = QuantidadeMaxClique;
+        this.QuantidadeMaxCompartilhamento = QuantidadeMaxCompartilhamento;
+    }
+
+    public String getValorTotalInvest() {
+        return ValorTotalInvest;
+    }
+
+    public void setValorTotalInvest(String ValorTotalInvest) {
+        this.ValorTotalInvest = ValorTotalInvest;
+    }
+
+    public int getQuantidadeMaxVisualizada() {
+        return QuantidadeMaxVisualizada;
+    }
+
+    public void setQuantidadeMaxVisualizada(int QuantidadeMaxVisualizada) {
+        this.QuantidadeMaxVisualizada = QuantidadeMaxVisualizada;
+    }
+
+    public int getQuantidadeMaxClique() {
+        return QuantidadeMaxClique;
+    }
+
+    public void setQuantidadeMaxClique(int QuantidadeMaxClique) {
+        this.QuantidadeMaxClique = QuantidadeMaxClique;
+    }
+
+    public int getQuantidadeMaxCompartilhamento() {
+        return QuantidadeMaxCompartilhamento;
+    }
+
+    public void setQuantidadeMaxCompartilhamento(int QuantidadeMaxCompartilhamento) {
+        this.QuantidadeMaxCompartilhamento = QuantidadeMaxCompartilhamento;
+    }   
+
+    public Cadastro getCad() {
+        return Cad;
+    }
+
+    public void setCad(Cadastro Cad) {
+        this.Cad = Cad;
+        
+    }    
+
+    public Calculadora02 getCal() {
+        return cal;
+    }
+
+    public void setCal(Calculadora02 cal) {
+        this.cal = cal;
+    }
+}

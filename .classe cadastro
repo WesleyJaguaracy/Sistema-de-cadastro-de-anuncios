@@ -1,0 +1,82 @@
+package projetoCadastro;
+
+/** 
+ * @author Wesley Jaguaracy
+ */
+public class Cadastro {
+    
+    private String Nome;
+    private String Cliente;
+    private String DataInicio;
+    private String DataTermino;
+    private String InvestDia;
+    private Relatorio Rel;
+    
+    
+    public Cadastro(){    
+        
+    }
+    
+    Cadastro(String Nome, String Cliente, String DataInicio, String DataTermino, String InvestDia) {    
+        this.Nome = Nome;
+        this.Cliente = Cliente;
+        this.DataInicio = DataInicio;
+        this.DataTermino = DataTermino;
+        this.InvestDia = InvestDia;
+        
+    }   
+
+    Cadastro(String text, String text0, String text1) {
+        //Templates.
+    }
+    
+    
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String Nome) {
+        this.Nome = Nome;
+    }
+
+    public String getCliente() {
+        return Cliente;
+    }
+
+    public void setCliente(String Cliente) {
+        this.Cliente = Cliente;
+    }
+
+    public String getDataInicio() {
+        return DataInicio;
+    }
+
+    public void setDataInicio(String DataInicio) {
+        this.DataInicio = DataInicio;        
+    }
+
+    public String getDataTermino() {
+        return DataTermino;
+    }
+
+    public void setDataTermino(String DataTermino) {
+        this.DataTermino = DataTermino;        
+    }
+
+    public String getInvestDia() {
+        return InvestDia;
+    }
+
+    public void setInvestDia(String InvestDia) {
+        this.InvestDia = InvestDia;
+    }      
+
+    public Relatorio getRel() {
+        return Rel;
+    }
+
+    public void setRel(Relatorio Rel) {
+        this.Rel = Rel;
+    }
+    
+}

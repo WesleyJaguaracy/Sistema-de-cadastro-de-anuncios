@@ -1,0 +1,94 @@
+package projetoSistemaCadastroAnuncios;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+/** 
+ * @author Wesley Jaguaracy
+ */
+public class Calculadora02 {
+
+        public static void Calculadora02 (String[] args) throws ParseException {
+    
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Locale.setDefault(Locale.US);
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Sistema de cadastro do anúncio");
+		System.out.println();
+		System.out.print("Nome do anúncio: ");
+		String nome = input.next();
+		System.out.print("Cliente: ");
+		input.nextLine();
+		String cliente = input.nextLine();
+		System.out.print("Data de início: ");
+		Date dataInicio = sdf.parse(input.next());
+		System.out.print("Data de término: ");
+		Date dataTermino = sdf.parse(input.next());
+		System.out.print("Investimento por dia: ");
+		double investimentos = input.nextDouble();
+		
+		long noted;
+		
+		if (dataTermino.getTime() > dataInicio.getTime()) {
+			noted = dataTermino.getTime() - dataInicio.getTime();
+		}
+		else {
+			noted = 0 *( dataTermino.getTime() - dataInicio.getTime() );
+		}
+		
+		int periodo = (int) TimeUnit.DAYS.convert(noted, TimeUnit.MILLISECONDS);
+
+		
+		int cliques_anuncio = 0;
+		int compartilhamentos = 0;		
+		int visualizacoes_anuncio = (int) (30 * investimentos);
+		
+		cliques_anuncio = visualizacoes_anuncio / ( 100 / 12 ) ;
+		
+		compartilhamentos = cliques_anuncio / (20 / 3 );
+		
+		
+		if (compartilhamentos >= 1) {
+			int compartilhamentos_Visualizados = compartilhamentos * 40 ;
+			visualizacoes_anuncio += compartilhamentos_Visualizados;
+			
+			int compartilhamentos_Visualizados_p2 = compartilhamentos_Visualizados;
+			
+			while(compartilhamentos_Visualizados_p2 >= 40) {
+				int cliques_anuncio_c2 = compartilhamentos_Visualizados_p2 / ( 100 / 12 ) ;
+				cliques_anuncio += cliques_anuncio_c2;
+				
+				int compartilhamentos_cp2 = cliques_anuncio_c2 / (20 / 3 );
+				compartilhamentos += compartilhamentos_cp2;
+				
+				if (compartilhamentos_cp2 >= 1) {
+					compartilhamentos_Visualizados_p2 = compartilhamentos_cp2 * 40 ;
+					visualizacoes_anuncio += compartilhamentos_Visualizados_p2;
+				}else {
+					compartilhamentos_Visualizados_p2 = 0;
+				}
+			}
+		}
+		visualizacoes_anuncio = visualizacoes_anuncio * periodo;
+		cliques_anuncio = cliques_anuncio * periodo;
+		compartilhamentos = compartilhamentos * periodo;
+		investimentos = investimentos * periodo;
+		
+		System.out.println();
+		System.out.println("----------------");
+		System.out.println();
+		System.out.println("Nome do anúncio: " + nome);
+		System.out.println("Cliente: " + cliente);
+		System.out.println("Valor total investido: R$ " + String.format("%.2f", investimentos)); 
+		System.out.println("Quantidade máxima de visualizações: " + visualizacoes_anuncio);
+		System.out.println("Quantidade máxima de cliques: "+ cliques_anuncio);
+		System.out.println("Quantidade máxima de compartilhamentos: " + compartilhamentos);
+		
+		input.close();
+	}
+}

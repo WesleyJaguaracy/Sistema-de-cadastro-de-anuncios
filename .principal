@@ -1,0 +1,112 @@
+package projetoSistemaCadastroAnuncios;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
+
+/** 
+ * @author Wesley Jaguaracy
+ */
+public class Principal02 extends javax.swing.JFrame {
+    CadastroTM Modelo = new CadastroTM();
+    
+    TableRowSorter trs;
+    
+    public Principal02() {
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        tbl_cad_cadastro.setModel(Modelo);
+        c_cad_nome.setEnabled(false);
+        c_cad_cliente.setEnabled(false);
+        c_cad_Inicio.setEnabled(false);
+        c_cad_Termino.setEnabled(false);
+        c_cad_InvesteDia.setEnabled(false);
+        
+        Modelo = (CadastroTM) tbl_cad_cadastro.getModel();
+        tbl_cad_cadastro.setRowSorter(new TableRowSorter(Modelo));
+    }
+
+    private void btn_cad_novoActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        c_cad_nome.setEnabled(true);
+        c_cad_cliente.setEnabled(true);
+        c_cad_Inicio.setEnabled(true);
+        c_cad_Termino.setEnabled(true);
+        c_cad_InvesteDia.setEnabled(true);
+    }                                            
+
+    private void btn_cad_salvarActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        Cadastro C = new Cadastro();
+        C.setNome(c_cad_nome.getText());
+        C.setCliente(c_cad_cliente.getText());
+        C.setDataInicio(c_cad_Inicio.getText());
+        C.setDataTermino(c_cad_Termino.getText());
+        C.setInvestDia(c_cad_InvesteDia.getText());
+
+        Modelo.addCadastro(C);
+    }                                              
+
+    private void btn_cad_alterarActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        
+        if(tbl_cad_cadastro.getSelectedRow() !=-1){
+         Modelo.setValueAt(c_cad_nome.getText(), tbl_cad_cadastro.getSelectedRow(), 0);
+         Modelo.setValueAt(c_cad_cliente.getText(), tbl_cad_cadastro.getSelectedRow(), 1);
+         Modelo.setValueAt(c_cad_Inicio.getText(), tbl_cad_cadastro.getSelectedRow(), 2);
+         Modelo.setValueAt(c_cad_Termino.getText(), tbl_cad_cadastro.getSelectedRow(), 3);
+         Modelo.setValueAt(c_cad_InvesteDia.getText(), tbl_cad_cadastro.getSelectedRow(), 4);       
+            
+        }        
+    }                                               
+
+    private void btn_cad_removerActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        
+        if(tbl_cad_cadastro.getSelectedRow()!= -1){
+            
+            Modelo.remove(tbl_cad_cadastro.getSelectedRow());
+        }
+        
+    }                                               
+
+    private void btn_cad_cancelarActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        c_cad_nome.setEnabled(false);
+        c_cad_cliente.setEnabled(false);
+        c_cad_Inicio.setEnabled(false);
+        c_cad_Termino.setEnabled(false);
+        c_cad_InvesteDia.setEnabled(false);
+    }                                                
+
+    private void tbl_cad_cadastroMouseClicked(java.awt.event.MouseEvent evt) {                                              
+        
+        if(tbl_cad_cadastro.getSelectedRow()!= -1){
+            
+            c_cad_nome.setText(tbl_cad_cadastro.getValueAt(tbl_cad_cadastro.getSelectedRow(), 0).toString());
+            c_cad_cliente.setText(tbl_cad_cadastro.getValueAt(tbl_cad_cadastro.getSelectedRow(), 1).toString());
+            c_cad_Inicio.setText(tbl_cad_cadastro.getValueAt(tbl_cad_cadastro.getSelectedRow(), 2).toString());
+            c_cad_Termino.setText(tbl_cad_cadastro.getValueAt(tbl_cad_cadastro.getSelectedRow(), 3).toString());
+            c_cad_InvesteDia.setText(tbl_cad_cadastro.getValueAt(tbl_cad_cadastro.getSelectedRow(), 4).toString());
+        }
+    }                                             
+
+    private void btn_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:        
+    }                                             
+
+    private void btn_pesquisarKeyTyped(java.awt.event.KeyEvent evt) {                                       
+        
+        btn_pesquisar.addKeyListener(new KeyAdapter(){            
+            
+            public void KeyReleased(KeyEvent Ke){
+                
+                trs.setRowFilter(RowFilter.regexFilter(btn_pesquisar.getText(), 1));
+                
+            }        
+    });
+            trs = new TableRowSorter(Modelo);
+            tbl_cad_cadastro.setRowSorter(trs);
+    }  
+
+}
+
+
+

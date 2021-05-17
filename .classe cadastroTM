@@ -1,0 +1,142 @@
+package projetoSistemaCadastroAnuncios;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.AbstractTableModel;
+
+/** 
+ * @author Wesley Jaguaracy
+ */
+public class CadastroTM extends AbstractTableModel{
+    
+    private List<Cadastro> linhas;
+    private String[] colunas = new String[]{"Nome","Cliente","Data início","Data término","Investimento por dia"};
+    
+    public CadastroTM(){
+        linhas = new ArrayList<Cadastro>();
+    }
+    
+    public CadastroTM(List<Cadastro>Linha){
+        linhas = new ArrayList<Cadastro>();
+    }
+    
+    @Override
+    public int getColumnCount() {
+        return colunas.length;
+    }
+    
+    @Override
+    public int getRowCount() {
+        return linhas.size();
+    }
+    
+    @Override
+    public String getColumnName(int columnIndex){
+        return colunas[columnIndex];
+    }
+    
+    @Override
+    public Class<?>getColumnClass(int columnIndex){
+            return String.class;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Cadastro C = linhas.get(rowIndex);
+        
+        switch (columnIndex){
+            case 0:
+                return C.getNome();
+            case 1:
+                return C.getCliente();
+            case 2:
+                return C.getDataInicio();
+            case 3:
+                return C.getDataTermino();
+            case 4:
+                return C.getInvestDia();
+            default:
+                throw new IndexOutOfBoundsException("ColumnIndex out of bounds");
+        }        
+    } 
+    
+    @Override
+    public void setValueAt (Object aValue, int rowIndex, int columnIndex){
+        Cadastro C = linhas.get(rowIndex);
+        
+        switch (columnIndex){
+            case 0:
+                C.setNome(aValue.toString());
+                break;
+            case 1:
+                C.setCliente(aValue.toString());
+                break;
+            case 2:
+                C.setDataInicio(aValue.toString());
+                break;
+            case 3:
+                C.setDataTermino(aValue.toString());
+                break;
+            case 4:
+                C.setInvestDia(aValue.toString());
+                break;
+            default:
+        }
+        this.fireTableCellUpdated(rowIndex, columnIndex);
+    }        
+    
+    public void setValueAt (Cadastro aValue, int rowIndex, int columnIndex){
+        Cadastro C = linhas.get(rowIndex);
+        
+        C.setNome(aValue.getNome());
+        C.setCliente(aValue.getCliente());
+        C.setDataInicio(aValue.getDataInicio());
+        C.setDataTermino(aValue.getDataTermino());
+        C.setInvestDia(aValue.getInvestDia());
+    
+        fireTableCellUpdated(rowIndex, 0);
+        fireTableCellUpdated(rowIndex, 1);
+        fireTableCellUpdated(rowIndex, 2);
+        fireTableCellUpdated(rowIndex, 3);
+        fireTableCellUpdated(rowIndex, 4);
+        
+    }
+        
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex){
+    return false;       
+    }
+    
+    public Cadastro getCadastro(int indiceLinha){
+        return linhas.get(indiceLinha);
+    }
+    
+    public void addCadastro(Cadastro C){
+        this.linhas.add(C);
+        this.fireTableDataChanged();
+        int ultimoIndice = getRowCount() - 1;
+        fireTableCellUpdated(ultimoIndice, ultimoIndice);
+    }
+    
+    public void remove(int indiceLinha){
+        this.linhas.remove(indiceLinha);
+        this.fireTableRowsDeleted(indiceLinha, indiceLinha);
+    }
+    
+    public void addLista(List<Cadastro> C){
+        int tamanhoAntigo = getRowCount();
+        
+        this.linhas.addAll(C);
+        this.fireTableRowsInserted(tamanhoAntigo, getRowCount()- 1);
+    }
+    
+    public void limpar() {
+        linhas.clear();
+        fireTableDataChanged();
+    }
+
+    /* Verifica se este table model esta vazio. */
+    public boolean isEmpty() {
+        return linhas.isEmpty();
+    }   
+}
